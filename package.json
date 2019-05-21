@@ -4,7 +4,8 @@
   "description": "Example running concurrent bulljs jobs and reporting when they all finish",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "monitor": "node monitor.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,10 @@
   },
   "homepage": "https://github.com/tamarasaurus/bulljs-example#readme",
   "dependencies": {
-    "bull": "^3.9.1"
+    "bull": "3.3.7"
+  },
+  "devDependencies": {
+    "bull-arena": "2.5.1",
+    "express": "^4.17.0"
   }
 }

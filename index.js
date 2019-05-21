@@ -1,5 +1,5 @@
 const Bull = require('bull');
-const queue = new Bull('queue');
+const queue = new Bull('inspect',  'redis://localhost:6379');
 
 const inspectors = {
     phpmetrics: require('./inspectors/phpmetrics.js'),
@@ -12,14 +12,13 @@ const isEveryJobComplete = () => {
     })
 }
 
-const getAllJobResults = () => {
-    return queue.getJobs().then(jobs => {
-        return jobs.map(job => job.data);
-    })
+const getAllJobResults = async () => {
+    const jobs = await queue.getJobs();
+    return jobs.map(job => job.data);
 }
 
-queue.clean(10).then(() => {
-    queue.process(async (job, done) => {
+queue.clean(1000).then(() => {
+    queue.process('inspect', 1, async (job, done) => {
         console.log('start', job.data.inspectorName)
 
         const Inspector = inspectors[job.data.inspectorName];
@@ -45,6 +44,6 @@ queue.clean(10).then(() => {
         console.log(error)
     })
 
-    const job1 = queue.add({ inspectorName: 'phpmetrics' });
-    const job2 = queue.add({ inspectorName: 'another' });
+    const job1 = queue.add('inspect', { name: '1', inspectorName: 'phpmetrics' });
+    const job2 = queue.add('inspect', { name: '2', inspectorName: 'another' });
 });
