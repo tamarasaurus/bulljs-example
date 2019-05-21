@@ -1,0 +1,22 @@
+{
+  "name": "bulljs-example",
+  "version": "1.0.0",
+  "description": "Example running concurrent bulljs jobs and reporting when they all finish",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tamarasaurus/bulljs-example.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tamarasaurus/bulljs-example/issues"
+  },
+  "homepage": "https://github.com/tamarasaurus/bulljs-example#readme",
+  "dependencies": {
+    "bull": "^3.9.1"
+  }
+}
